@@ -9,39 +9,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5a312df2-0748-4768-92b6-b91a3b5079c2" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/moskvin/controllers/AuthorizationController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/moskvin/controllers/InfoController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/moskvin/controllers/MenuController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/moskvin/controllers/PlanController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/moskvin/controllers/RegistrationController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/moskvin/controllers/StartController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/moskvin/dao/PersonDAO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/moskvin/dao/PlanDAO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/moskvin/models/Person.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/moskvin/models/Plan.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/moskvin/util/EndDateAfterStartDate.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/moskvin/util/EndDateAfterStartDateValidator.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/moskvin/util/PersonValidator.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/moskvin/util/PlanValidator.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/img/user.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/authorization/authorization.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/info/editProfile.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/info/userProfile.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/menu/main.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/menu/newPlan.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/menu/plans.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/registration/registration.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml" afterDir="false" />
-    </list>
+    <list default="true" id="5a312df2-0748-4768-92b6-b91a3b5079c2" name="Changes" comment="First Commit" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -56,6 +24,11 @@
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="master" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="LogFilters">
@@ -224,8 +197,16 @@
       <workItem from="1684929756166" duration="10251000" />
       <workItem from="1685007468360" duration="5858000" />
       <workItem from="1685019897382" duration="8433000" />
-      <workItem from="1685091650075" duration="8629000" />
+      <workItem from="1685091650075" duration="8962000" />
     </task>
+    <task id="LOCAL-00001" summary="First Commit">
+      <created>1685100562444</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1685100562444</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -241,5 +222,9 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="First Commit" />
+    <option name="LAST_COMMIT_MESSAGE" value="First Commit" />
   </component>
 </project>
