@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <title>Авторизація</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    .container {
+      max-width: 400px;
+      margin: 0 auto;
+      padding: 20px;
+      background-color: #ffffff;
+    }
+
+    h2 {
+      text-align: center;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-group label {
+      display: block;
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+
+    .form-group input {
+      width: 100%;
+      padding: 8px;
+      border: 1px solid #ccc;
+      border-radius: 3px;
+    }
+
+    .form-group button {
+      width: 100%;
+      padding: 8px;
+      background-color: #4aeaff;
+      color: #fff;
+      border: none;
+      border-radius: 3px;
+      cursor: pointer;
+    }
+
+    .form-group .register-link {
+      text-align: center;
+      margin-top: 10px;
+    }
+
+    .form-group .register-link a {
+      color: #4aeaff;
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <h2>Авторизація</h2>
+  <form th:action="@{/authorization}" method="post">
+    <div class="form-group">
+      <label for="username">Логін</label>
+      <input type="text" id="username" name="username" placeholder="Введіть логін">
+    </div>
+    <div class="form-group">
+      <label for="password">Пароль</label>
+      <input type="password" id="password" name="password" placeholder="Введіть пароль">
+    </div>
+    <div class="form-group">
+      <button type="submit">Увійти</button>
+    </div>
+    <div class="form-group register-link">
+      <a href="/registration">Зареєструватися</a>
+    </div>
+    <div class="form-group" th:if="${error}">
+      <p class="error-message" th:text="${error}"></p>
+    </div>
+  </form>
+</div>
+</body>
+</html>

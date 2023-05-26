@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Плани</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #ffffff;
+            margin: 0;
+            padding: 0;
+        }
+
+        .menu-bar {
+            background-color: #4aeaff;
+            padding: 20px;
+            width: 100%;
+            height: 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            vertical-align: auto;
+        }
+
+        .menu-button {
+            color: #ffffff;
+            text-decoration: none;
+            padding: 10px 20px;
+            margin-left: 10px;
+            font-size: x-large;
+        }
+
+        .user-button {
+            color: #ffffff;
+            text-decoration: none;
+            padding: 10px 20px;
+            margin-right: 20px;
+            font-size: x-large;
+        }
+
+        h2 {
+            text-align: center;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            padding: 10px;
+            border: 1px solid #ccc;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+            font-weight: bold;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+    </style>
+</head>
+<body>
+<div class="menu-bar">
+    <a th:href="@{/menu}" th:method="GET" class="menu-button"> Abs Manager</a>
+    <a th:href="@{/info}" th:method="GET" class="user-button"> Профіль</a>
+</div>
+<div th:if="${plans.isEmpty()}">
+    <p>У вас ще не створено планів, бажаєте створити новий?</p>
+    <a th:href="@{/plan/new}" th:method="GET" class="create-plan-button">Створити план</a>
+</div>
+<div th:if="${!plans.isEmpty()}">
+    <h1>Плани</h1>
+    <table>
+        <tr>
+            <th>Назва</th>
+            <th>Дата початку</th>
+            <th>Дата закінчення</th>
+        </tr>
+        <tr th:each="plan : ${plans}">
+            <td th:text="${plan.name}"></td>
+            <td th:text="${#dates.format(plan.getStart_date(), 'yyyy-MM-dd')}"></td>
+            <td th:text="${#dates.format(plan.getEnd_date(), 'yyyy-MM-dd')}"></td>
+        </tr>
+    </table>
+</div>
+</body>
+</html>

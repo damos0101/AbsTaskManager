@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <title>Реєстрація</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    .container {
+      max-width: 400px;
+      margin: 0 auto;
+      padding: 20px;
+      background-color: #ffffff;
+    }
+
+    h2 {
+      text-align: center;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-group label {
+      display: block;
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+
+    .form-group input {
+      width: 100%;
+      padding: 8px;
+      border: 1px solid #ccc;
+      border-radius: 3px;
+    }
+
+    .form-group button {
+      width: 100%;
+      padding: 8px;
+      background-color: #4aeaff;
+      color: #fff;
+      border: none;
+      border-radius: 3px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <h2>Реєстрація</h2>
+  <form th:object="${person}" th:action="@{/registration}" method="post">
+    <div class="form-group">
+      <label for="email">Пошта</label>
+      <input type="email" id="email" th:field="*{email}"  placeholder="Введіть вашу пошту" required>
+      <span class="error" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>
+    </div>
+    <div class="form-group">
+      <label for="name">Ім'я</label>
+      <input type="text" id="name" th:field="*{name}" placeholder="Введіть ваше ім'я" required>
+      <span class="error" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span>
+    </div>
+    <div class="form-group">
+      <label for="date">Дата народження</label>
+      <input type="date" id="date" th:field="*{date}">
+      <span class="error" th:if="${#fields.hasErrors('date')}" th:errors="*{date}"></span>
+    </div>
+    <div class="form-group">
+      <label for="username">Логін</label>
+      <input type="text" id="username" th:field="*{username}" placeholder="Введіть логін" required>
+      <span class="error" th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></span>
+    </div>
+    <div class="form-group">
+      <label for="password">Пароль</label>
+      <input type="password" id="password" th:field="*{password}" placeholder="Введіть пароль" required>
+      <span class="error" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span>
+    </div>
+    <div class="form-group">
+      <button type="submit">Зареєструватися</button>
+    </div>
+    <div class="form-group" th:if="${#fields.hasGlobalErrors()}">
+      <span class="error" th:each="error : ${#fields.globalErrors()}" th:text="${error}"></span>
+    </div>
+  </form>
+</div>
+</body>
+</html>
