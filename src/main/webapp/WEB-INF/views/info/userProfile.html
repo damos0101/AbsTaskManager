@@ -1,147 +1,169 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Моя сторінка користувача</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background-color: #ffffff;
-      margin: 0;
-      padding: 0;
-      overflow: hidden; /* Доданий стиль */
-    }
+    <title>Моя сторінка користувача</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #ffffff;
+            margin: 0;
+            padding: 0;
+            overflow: hidden; /* Доданий стиль */
+        }
 
-    .menu-bar {
-      background-color: #4aeaff;
-      padding: 20px;
-      width: 100%;
-      height: 30px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      vertical-align: auto;
-    }
+        .menu-bar {
+            background-color: #4aeaff;
+            padding: 20px;
+            width: 100%;
+            height: 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            vertical-align: auto;
+        }
 
-    .menu-button {
-      color: #ffffff;
-      text-decoration: none;
-      padding: 10px 20px;
-      margin-left: 10px;
-      font-size: x-large;
-    }
+        .menu-button {
+            color: #ffffff;
+            text-decoration: none;
+            padding: 10px 20px;
+            margin-left: 10px;
+            font-size: x-large;
+        }
 
-    .user-button {
-      color: #ffffff;
-      text-decoration: none;
-      padding: 10px 20px;
-      margin-right: 20px;
-      font-size: x-large;
-    }
+        .user-button {
+            color: #ffffff;
+            text-decoration: none;
+            padding: 10px 20px;
+            margin-right: 20px;
+            font-size: x-large;
+        }
 
-    h1 {
-      color: #000000;
-    }
+        h1 {
+            color: #000000;
+        }
 
-    .user-card {
-      background-color: #ffffff;
-      border-radius: 10px;
-      text-align: center;
-      height: calc(100vh - 40px); /* Займати весь доступний простір по вертикалі (100vh) мінус висота меню (40px) */
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: flex-start; /* Вирівнювання контенту вгору */
-      padding-top: 20px; /* Доданий внутрішній відступ зверху */
-    }
+        .user-card {
+            background-color: #ffffff;
+            border-radius: 10px;
+            text-align: center;
+            height: calc(100vh - 40px); /* Займати весь доступний простір по вертикалі (100vh) мінус висота меню (40px) */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start; /* Вирівнювання контенту вгору */
+            padding-top: 20px; /* Доданий внутрішній відступ зверху */
+        }
 
-    .user-card h1 {
-      margin-top: 0; /* Видаляємо зовнішній відступ зверху для заголовка */
-    }
+        .user-card h1 {
+            margin-top: 0; /* Видаляємо зовнішній відступ зверху для заголовка */
+        }
 
-    .user-card p {
-      margin-top: 12px; /* Збільшуємо зовнішній відступ зверху для параграфів */
-      margin-bottom: 12px; /* Збільшуємо зовнішній відступ знизу для параграфів */
-    }
+        .user-card p {
+            margin-top: 12px; /* Збільшуємо зовнішній відступ зверху для параграфів */
+            margin-bottom: 12px; /* Збільшуємо зовнішній відступ знизу для параграфів */
+        }
 
-    .user-card .name {
-      font-size: 24px;
-      color: #000000;
-      margin-top: 12px;
-      margin-bottom: 12px;
-    }
+        .user-card .name {
+            font-size: 24px;
+            color: #000000;
+            margin-top: 12px;
+            margin-bottom: 12px;
+        }
 
-    .user-card .email {
-      color: #000000;
-      font-size: 24px;
-      margin-top: 12px;
-      margin-bottom: 12px;
-    }
+        .user-card .email {
+            color: #000000;
+            font-size: 24px;
+            margin-top: 12px;
+            margin-bottom: 12px;
+        }
 
-    .user-card .username {
-      color: #000000;
-      font-size: 24px;
-      margin-top: 12px;
-      margin-bottom: 12px;
-    }
+        .user-card .username {
+            color: #000000;
+            font-size: 24px;
+            margin-top: 12px;
+            margin-bottom: 12px;
+        }
 
-    .user-card .date {
-      color: #000000;
-      font-size: 24px;
-      margin-top: 12px;
-      margin-bottom: 12px;
-    }
+        .user-card .date {
+            color: #000000;
+            font-size: 24px;
+            margin-top: 12px;
+            margin-bottom: 12px;
+        }
 
-    .edit-form {
-      text-align: center;
-      margin-top: 12px;
-    }
+        .button-container {
+            width: 300px;
+            margin: 0 auto;
+        }
 
-    .edit-button {
-      background-color: #4aeaff;
-      color: #ffffff;
-      border: none;
-      border-radius: 5px;
-      padding: 10px 20px;
-      font-size: 18px;
-      cursor: pointer;
-    }
+        .edit-form {
+            text-align: center;
+            margin-top: 12px;
+        }
 
-    .logout-form {
-      text-align: center;
-      margin-top: 12px;
-    }
+        .edit-button {
+            display: block;
+            width: 100%;
+            background-color: #4aeaff;
+            color: #ffffff;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            font-size: 18px;
+            cursor: pointer;
+            text-decoration: none;
+            margin-bottom: 10px;
+        }
 
-    .logout-button {
-      background-color: #4aeaff;
-      color: #ffffff;
-      border: none;
-      border-radius: 5px;
-      padding: 10px 20px;
-      font-size: 18px;
-      cursor: pointer;
-    }
-  </style>
+        .logout-form {
+            text-align: center;
+            margin-top: 12px;
+        }
+
+        .logout-button {
+            display: block;
+            width: 100%;
+            background-color: #4aeaff;
+            color: #ffffff;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            font-size: 18px;
+            cursor: pointer;
+            text-decoration: none;
+            margin-bottom: 10px;
+        }
+
+        .edit-button:hover,
+        .logout-button:hover {
+            background-color: #48d1ff;
+        }
+
+
+    </style>
 </head>
 <body>
 <div class="menu-bar">
-  <a th:href="@{/menu}" th:method="GET" class="menu-button"> Abs Manager</a>
-  <a th:href="@{/info}" th:method="GET" class="user-button"> Профіль</a>
+    <a th:href="@{/menu}" th:method="GET" class="menu-button"> Abs Manager</a>
+    <a th:href="@{/info}" th:method="GET" class="user-button"> Профіль</a>
 </div>
 <div class="user-card">
-  <h1>Профіль</h1>
-  <p class="name">Ім'я: <span th:text="${person.getName()}">Ім'я</span></p>
-  <p class="email">Пошта: <span th:text="${person.getEmail()}">Пошта</span></p>
-  <p class="username">Юзернейм: <span th:text="${person.getUsername()}">Юзернейм</span></p>
-  <p class="date">Дата народження: <span
-          th:text="${#dates.format(person.getDate(), 'yyyy-MM-dd')}">Дата народження</span></p>
-  </br>
-  <form class="edit-form" th:method="GET" th:action="@{/info/editProfile}">
-    <input class="edit-button" name="editProfile" type="submit" value="Редагувати дані"/>
-  </form>
+    <h1>Профіль</h1>
+    <p class="name">Ім'я: <span th:text="${person.getName()}">Ім'я</span></p>
+    <p class="email">Пошта: <span th:text="${person.getEmail()}">Пошта</span></p>
+    <p class="username">Юзернейм: <span th:text="${person.getUsername()}">Юзернейм</span></p>
+    <p class="date">Дата народження: <span
+            th:text="${#dates.format(person.getDate(), 'yyyy-MM-dd')}">Дата народження</span></p>
+    </br>
+    <div class="button-container">
+        <form class="edit-form" th:method="GET" th:action="@{/info/editProfile}">
+            <input class="edit-button" name="editProfile" type="submit" value="Редагувати дані"/>
+        </form>
 
-  <form class="logout-form" th:method="POST" th:action="@{/authorization/logout}">
-    <input class="logout-button" name="logoutProfile" type="submit" value="Вийти з аккаунту"/>
-  </form>
+        <form class="logout-form" th:method="POST" th:action="@{/authorization/logout}">
+            <input class="logout-button" name="logoutProfile" type="submit" value="Вийти з аккаунту"/>
+        </form>
+    </div>
 </div>
 </body>
 </html>

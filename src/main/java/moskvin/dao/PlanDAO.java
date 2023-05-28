@@ -26,7 +26,7 @@ public class PlanDAO {
                 new Object[]{id}, new BeanPropertyRowMapper<>(Plan.class));
     }
 
-    public Plan show(int id) {
+    public Plan findById(int id) {
         return jdbcTemplate.query("select * from plan where id=?",
                         new Object[]{id}, new BeanPropertyRowMapper<>(Plan.class))
                 .stream().findAny().orElse(null);
