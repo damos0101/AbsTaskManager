@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Створити завдання</title>
+    <title>Список друзів</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -85,6 +85,16 @@
             background-color: #55c4ff;
         }
 
+        .friend-item {
+            list-style: none;
+            padding: 10px;
+        }
+
+        .friend-name {
+            color: #000000;
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
     </style>
 </head>
 <body>
@@ -93,32 +103,11 @@
     <a th:href="@{/plans}" th:method="GET" class="menu-button"> Плани</a>
     <a th:href="@{/info}" th:method="GET" class="menu-button"> Профіль</a>
 </div>
-<div class="container">
-    <h1>Створення нового завдання</h1>
-    <form th:method="POST" th:action="@{/plan/tasks/create}" th:object="${task}">
-        <div class="form-group">
-            <label for="name">Назва завдання</label>
-            <input type="text" id="name" th:field="*{name}" placeholder="Введіть назву плану" required>
-            <span class="error" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span>
-        </div>
-        <div class="form-group">
-            <label for="start_time">Час початку</label>
-            <input type="datetime-local" id="start_time" th:field="*{start_time}" th:attr="pattern='yyyy-MM-dd\'T\'HH:mm'">
-            <span class="error" th:if="${#fields.hasErrors('start_time')}" th:errors="*{start_time}"></span>
-        </div>
-        <div class="form-group">
-            <label for="end_time">Дата закінчення</label>
-            <input type="datetime-local" id="end_time" th:field="*{end_time}" th:attr="pattern='yyyy-MM-dd\'T\'HH:mm'">
-            <span class="error" th:if="${#fields.hasErrors('end_time')}" th:errors="*{end_time}"></span>
-        </div>
-        <input type="hidden" name="planId" th:value="${planId}" />
-        <div class="form-group">
-            <button type="submit">Створити завдання</button>
-        </div>
-        <div class="form-group" th:if="${#fields.hasGlobalErrors()}">
-            <span class="error" th:each="error : ${#fields.globalErrors()}" th:text="${error}"></span>
-        </div>
-    </form>
-</div>
+<h1>Список друзів</h1>
+<ul>
+    <th:block th:each="friend : ${friends}" class="friend-item">
+        <li th:text="${friend.getName()}" class="friend-name"></li>
+    </th:block>
+</ul>
 </body>
 </html>

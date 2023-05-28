@@ -102,8 +102,9 @@
 </head>
 <body>
 <div class="menu-bar">
-    <a th:href="@{/menu}" th:method="GET" class="menu-button"> Abs Manager</a>
-    <a th:href="@{/info}" th:method="GET" class="user-button"> Профіль</a>
+    <a th:href="@{/friends}" th:method="GET" class="menu-button"> Друзі</a>
+    <a th:href="@{/plans}" th:method="GET" class="menu-button"> Плани</a>
+    <a th:href="@{/info}" th:method="GET" class="menu-button"> Профіль</a>
 </div>
 <h1>Плани</h1>
 <table>
@@ -117,7 +118,9 @@
         <td th:text="${task.name}"></td>
         <td th:text="${task.getStart_time()}"></td>
         <td th:text="${task.getEnd_time()}"></td>
-        <td th:text="${task.isCompleted()}"></td>
+        <td>
+            <span th:text="${task.isCompleted()} ? 'так' : 'ні'"></span>
+        </td>
     </tr>
 </table>
 <br/>

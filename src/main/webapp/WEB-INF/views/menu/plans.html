@@ -68,6 +68,19 @@
             margin: 0 auto;
         }
 
+        html, body {
+            height: 100%;
+            overflow: hidden;
+        }
+
+        .container {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
         .main {
             background-color: #ffffff;
             border-radius: 10px;
@@ -102,8 +115,9 @@
 </head>
 <body>
 <div class="menu-bar">
-    <a th:href="@{/menu}" th:method="GET" class="menu-button"> Abs Manager</a>
-    <a th:href="@{/info}" th:method="GET" class="user-button"> Профіль</a>
+    <a th:href="@{/friends}" th:method="GET" class="menu-button"> Друзі</a>
+    <a th:href="@{/plans}" th:method="GET" class="menu-button"> Плани</a>
+    <a th:href="@{/info}" th:method="GET" class="menu-button"> Профіль</a>
 </div>
 <div th:if="${plans.isEmpty()}">
     <p>У вас ще не створено планів, бажаєте створити новий?</p>
@@ -131,6 +145,13 @@
             <td th:text="${#dates.format(plan.getEnd_date(), 'yyyy-MM-dd')}"></td>
         </tr>
     </table>
+    <div class="main">
+        <div class="button-container">
+            <form th:method="GET" th:action="@{/plan/new}">
+                <button class="create-plan-button" type="submit">Створити план</button>
+            </form>
+        </div>
+    </div>
 </div>
 </body>
 </html>

@@ -9,23 +9,25 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5a312df2-0748-4768-92b6-b91a3b5079c2" name="Changes" comment="First Commit">
-      <change afterPath="$PROJECT_DIR$/src/main/java/moskvin/controllers/TaskController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/moskvin/dao/TaskDAO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/moskvin/models/Task.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/moskvin/util/TaskValidator.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/error/access-denied.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/tasks/newTask.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/tasks/task.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/tasks/tasks.html" afterDir="false" />
+    <list default="true" id="5a312df2-0748-4768-92b6-b91a3b5079c2" name="Changes" comment="Add Task">
+      <change afterPath="$PROJECT_DIR$/src/main/java/moskvin/controllers/FriendshipController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/moskvin/dao/FriendshipDAO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/css/menuStyles.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/friends/friends.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/header/header.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/info/otherUserProfile.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/tasks/editTask.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/moskvin/dao/PlanDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/moskvin/dao/PlanDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/authorization/authorization.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/authorization/authorization.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/moskvin/controllers/MenuController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/error/access-denied.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/error/access-denied.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/info/editProfile.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/info/editProfile.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/info/userProfile.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/info/userProfile.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/menu/main.html" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/menu/newPlan.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/menu/newPlan.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/menu/plans.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/menu/plans.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/registration/registration.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/registration/registration.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/tasks/newTask.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/tasks/newTask.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/tasks/tasks.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/tasks/tasks.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -36,6 +38,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Class" />
+        <option value="CSS File" />
         <option value="HTML File" />
       </list>
     </option>
@@ -79,6 +82,7 @@
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "WebServerToolWindowFactoryState": "false",
     "last_opened_file_path": "D:/Java/AbsTaskManager",
+    "list.type.of.created.stylesheet": "CSS",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -102,11 +106,11 @@
       <recent name="D:\Java\AbsTaskManager\src\main\webapp\WEB-INF\views\img" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\Java\AbsTaskManager\src\main\webapp\WEB-INF\views\header" />
       <recent name="D:\Java\AbsTaskManager\src\main\webapp\WEB-INF\views\img" />
       <recent name="D:\Java\AbsTaskManager\src\main\resources" />
       <recent name="D:\Java\AbsTaskManager\src\main\webapp\WEB-INF\views\info" />
       <recent name="D:\Java\AbsTaskManager\src\main\webapp\WEB-INF\views\account" />
-      <recent name="D:\Java\AbsTaskManager\src\main\webapp\WEB-INF\views\authorization" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="moskvin.config" />
@@ -215,7 +219,7 @@
       <workItem from="1685007468360" duration="5858000" />
       <workItem from="1685019897382" duration="8433000" />
       <workItem from="1685091650075" duration="15597000" />
-      <workItem from="1685264978859" duration="8741000" />
+      <workItem from="1685264978859" duration="13913000" />
     </task>
     <task id="LOCAL-00001" summary="First Commit">
       <created>1685100562444</created>
@@ -231,7 +235,14 @@
       <option name="project" value="LOCAL" />
       <updated>1685100709199</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Add Task">
+      <created>1685275046192</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1685275046192</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -250,7 +261,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="First Commit" />
-    <option name="LAST_COMMIT_MESSAGE" value="First Commit" />
+    <MESSAGE value="Add Task" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add Task" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
