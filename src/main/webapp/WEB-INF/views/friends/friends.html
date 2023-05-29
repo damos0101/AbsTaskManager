@@ -37,20 +37,8 @@
             font-size: x-large;
         }
 
-        .user-button {
-            color: #ffffff;
-            text-decoration: none;
-            padding: 10px 20px;
-            margin-right: 20px;
-            font-size: x-large;
-        }
-
         h2 {
-            text-align: center;
-        }
-
-        .form-group {
-            margin-bottom: 20px;
+            text-align: left;
         }
 
         .form-group label {
@@ -85,15 +73,81 @@
             background-color: #55c4ff;
         }
 
-        .friend-item {
-            list-style: none;
-            padding: 10px;
+        .friend-list {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
         }
 
-        .friend-name {
-            color: #000000;
-            font-size: 18px;
+        .friend-item {
             margin-bottom: 10px;
+        }
+
+        .friend-link {
+            font-size: 28px;
+            color: blue;
+            text-decoration: none;
+        }
+
+        .friend-link:hover {
+            text-decoration: underline;
+        }
+
+        .friend-info {
+            display: inline-block;
+        }
+
+        .cancel-request-form, .accept-request-form {
+            display: inline;
+            margin-top: 12px;
+        }
+
+        .cancel-request-button, .accept-request-button {
+            width: 160px;
+            background-color: #4aeaff;
+            color: #ffffff;
+            border: none;
+            border-radius: 5px;
+            margin-left: auto;
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 10px;
+            cursor: pointer;
+            text-decoration: none;
+            margin-bottom: 10px;
+        }
+
+        .cancel-request-button:hover, .accept-request-button:hover {
+            background-color: #48d1ff;
+        }
+
+        .add-friend-form {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .friend-username-input {
+            padding: 15px 30px;
+            font-size: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .add-friend-button {
+            background-color: #4aeaff;
+            width: 160px;
+            color: #ffffff;
+            border: none;
+            border-radius: 5px;
+            padding: 15px 30px;
+            font-size: 15px;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .add-friend-button:hover {
+            background-color: #48d1ff;
         }
     </style>
 </head>
@@ -104,10 +158,61 @@
     <a th:href="@{/info}" th:method="GET" class="menu-button"> Профіль</a>
 </div>
 <h1>Список друзів</h1>
-<ul>
+<ul class="friend-list">
     <th:block th:each="friend : ${friends}" class="friend-item">
-        <li th:text="${friend.getName()}" class="friend-name"></li>
+        <a th:href="@{/info/{id}(id=${friend.getId()})}" class="friend-link">
+            <span class="friend-username" th:text="${friend.getUsername()}"></span>
+        </a>
+        <br/>
     </th:block>
 </ul>
+<div class="friend-requests">
+    <h1>Запити у друзі</h1>
+
+    <h2>Надіслані</h2>
+    <ul class="friend-list">
+        <th:block th:each="friend : ${sentFriendshipRequests}" class="friend-item">
+            <li>
+                <div class="friend-info">
+                    <a th:href="@{/info/{id}(id=${friend.getId()})}" class="friend-link">
+                        <span class="friend-username" th:text="${friend.getUsername()}"></span>
+                    </a>
+                    <form th:action="@{/cancel-sent-request}" method="POST" class="cancel-request-form">
+                        <input type="hidden" name="friendId" th:value="${friend.getId()}">
+                        <button type="submit" class="cancel-request-button">Відмінити запит</button>
+                    </form>
+                </div>
+            </li>
+        </th:block>
+    </ul>
+
+    <h2>Отримані</h2>
+    <ul class="friend-list">
+        <th:block th:each="friend : ${receivedFriendshipRequests}" class="friend-item">
+            <li>
+                <div class="friend-info">
+                    <a th:href="@{/info/{id}(id=${friend.getId()})}" class="friend-link">
+                        <span class="friend-username" th:text="${friend.getUsername()}"></span>
+                    </a>
+                    <form th:action="@{/accept-request}" method="POST" class="accept-request-form">
+                        <input type="hidden" name="friendId" th:value="${friend.getId()}">
+                        <button type="submit" class="accept-request-button">Прийняти запит</button>
+                    </form>
+                    <form th:action="@{/cancel-received-request}" method="POST" class="cancel-request-form">
+                        <input type="hidden" name="friendId" th:value="${friend.getId()}">
+                        <button type="submit" class="cancel-request-button">Відхилити запит</button>
+                    </form>
+                </div>
+            </li>
+        </th:block>
+    </ul>
+</div>
+<form th:action="@{/search-friend}" method="POST" class="add-friend-form">
+    <input type="text" name="username" placeholder="Введіть юзернейм" class="friend-username-input">
+    <button type="submit" class="add-friend-button">Додати друга</button>
+    <div class="form-group" th:if="${userNameError}">
+        <p class="error-message" th:text="${userNameError}"></p>
+    </div>
+</form>
 </body>
 </html>
