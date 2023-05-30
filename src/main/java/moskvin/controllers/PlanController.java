@@ -33,6 +33,7 @@ public class PlanController {
         if (userId != null) {
             // Встановлення класу Person, який створив план
             model.addAttribute("plans", planDAO.getPlansByPersonId(userId));
+            model.addAttribute("access_plans", planDAO.getPlansAccessByPersonId(userId));
 
             return "menu/plans";
         }
@@ -65,7 +66,7 @@ public class PlanController {
             plan.setPerson_id(person.getId());
 
             planDAO.save(plan);
-            return "redirect:/menu";
+            return "redirect:/plans";
         }
         return "redirect:/authorization";
     }

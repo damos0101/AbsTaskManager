@@ -98,7 +98,7 @@
     <form th:method="POST" th:action="@{/plan/tasks/create}" th:object="${task}">
         <div class="form-group">
             <label for="name">Назва завдання</label>
-            <input type="text" id="name" th:field="*{name}" placeholder="Введіть назву плану" required>
+            <input type="text" id="name" th:field="*{name}" placeholder="Введіть назву завдання" required>
             <span class="error" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span>
         </div>
         <div class="form-group">

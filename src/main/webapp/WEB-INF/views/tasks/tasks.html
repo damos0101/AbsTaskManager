@@ -98,6 +98,35 @@
             background-color: #48d1ff;
         }
 
+        .add-friend-form {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .friend-username-input {
+            padding: 15px 20px;
+            font-size: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .add-friend-button {
+            background-color: #4aeaff;
+            width: 160px;
+            color: #ffffff;
+            border: none;
+            border-radius: 5px;
+            padding: 15px 20px;
+            font-size: 10px;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .add-friend-button:hover {
+            background-color: #48d1ff;
+        }
+
     </style>
 </head>
 <body>
@@ -130,5 +159,28 @@
         <button class="create-task-button" type="submit">Створити завдання</button>
     </form>
 </div>
+
+<form th:action="@{/plan/addPerson}" method="POST" class="add-friend-form">
+    <input type="text" name="username" placeholder="Введіть юзернейм" class="friend-username-input">
+    <input type="hidden" name="planId" th:value="${planId}" />
+    <button type="submit" class="add-friend-button">Додати користувача до перегляду</button>
+    <div class="form-group" th:if="${userNameError}">
+        <p class="error-message" th:text="${userNameError}"></p>
+    </div>
+</form>
+<h1>Створив план</h1>
+<p>План створений користувачем:
+    <a th:href="@{/info/{id}(id=${admin.getId()})}" class="friend-link">
+    <span class="friend-username" th:text="${admin.getUsername()}"></span>
+</a></p>
+<h1>Користувачі що мають доступ</h1>
+<ul class="users-list">
+    <th:block th:each="user : ${users}" class="friend-item">
+        <a th:href="@{/info/{id}(id=${user.getId()})}" class="friend-link">
+            <span class="friend-username" th:text="${user.getUsername()}"></span>
+        </a>
+    </th:block>
+</ul>
+
 </body>
 </html>

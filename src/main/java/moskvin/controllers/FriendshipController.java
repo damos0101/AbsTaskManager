@@ -91,7 +91,7 @@ public class FriendshipController {
     }
 
     @PostMapping("/search-friend")
-    public String searchFriend(@RequestParam("username") String username, HttpSession session, Model model, RedirectAttributes redirectAttributes) {
+    public String searchFriend(@RequestParam("username") String username, HttpSession session, RedirectAttributes redirectAttributes) {
         Integer userId = (Integer) session.getAttribute("userId");
         if(userId!=null) {
             Person person = personDAO.findByUsername(username);
@@ -117,6 +117,15 @@ public class FriendshipController {
                 redirectAttributes.addFlashAttribute("userNameError", "Користувача з таким юзернеймом не знайдено");
                 return "redirect:/friends";
             }
+        }
+        return "redirect:/friends";
+    }
+
+    @PostMapping("/delete-friend")
+    public String deleteFriend(@RequestParam("friendId") int friendId, HttpSession session){
+        Integer userId = (Integer) session.getAttribute("userId");
+        if (userId != null) {
+            friendshipDAO.deleteFriend(userId, friendId);
         }
         return "redirect:/friends";
     }

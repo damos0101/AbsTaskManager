@@ -66,4 +66,9 @@ public class FriendshipDAO {
     public void cancelFriendshipRequest(Integer userId, int friendId) {
         jdbcTemplate.update("delete from friendship where person1_id = ? and person2_id=?", userId, friendId);
     }
+
+    public void deleteFriend(Integer userId, int friendId) {
+        jdbcTemplate.update("delete from friendship where (person1_id=? and person2_id=?) or(person2_id=? and person1_id=?)",
+                userId, friendId, userId, friendId);
+    }
 }

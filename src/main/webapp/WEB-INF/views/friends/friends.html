@@ -97,12 +97,12 @@
             display: inline-block;
         }
 
-        .cancel-request-form, .accept-request-form {
+        .cancel-request-form, .accept-request-form, .delete-from-friends-form {
             display: inline;
             margin-top: 12px;
         }
 
-        .cancel-request-button, .accept-request-button {
+        .cancel-request-button, .accept-request-button, .delete-from-friends-button {
             width: 160px;
             background-color: #4aeaff;
             color: #ffffff;
@@ -117,7 +117,7 @@
             margin-bottom: 10px;
         }
 
-        .cancel-request-button:hover, .accept-request-button:hover {
+        .cancel-request-button:hover, .accept-request-button:hover, .delete-from-friends-button:hover {
             background-color: #48d1ff;
         }
 
@@ -163,6 +163,10 @@
         <a th:href="@{/info/{id}(id=${friend.getId()})}" class="friend-link">
             <span class="friend-username" th:text="${friend.getUsername()}"></span>
         </a>
+        <form th:action="@{/delete-friend}" method="POST" class="delete-from-friends-form">
+            <input type="hidden" name="friendId" th:value="${friend.getId()}">
+            <button type="submit" class="delete-from-friends-button">Видалити з друзів</button>
+        </form>
         <br/>
     </th:block>
 </ul>

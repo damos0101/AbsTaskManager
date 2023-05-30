@@ -30,13 +30,6 @@
             font-size: x-large;
         }
 
-        .user-button {
-            color: #ffffff;
-            text-decoration: none;
-            padding: 10px 20px;
-            margin-right: 20px;
-            font-size: x-large;
-        }
 
         h2 {
             text-align: center;
@@ -73,27 +66,18 @@
             overflow: hidden;
         }
 
-        .container {
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-        }
-
         .main {
             background-color: #ffffff;
             border-radius: 10px;
             text-align: center;
-            height: calc(100vh - 40px); /* Займати весь доступний простір по вертикалі (100vh) мінус висота меню (40px) */
             width: 260px;
             flex-direction: column;
             align-items: start;
-            justify-content: flex-start; /* Вирівнювання контенту вгору */
-            padding-top: 20px; /* Доданий внутрішній відступ зверху */
+            justify-content: flex-start;
+            padding-top: 20px;
         }
 
-        .create-plan-button{
+        .create-plan-button {
             display: block;
             width: 100%;
             background-color: #4aeaff;
@@ -107,10 +91,9 @@
             margin-bottom: 10px;
         }
 
-        .create-plan-button:hover{
+        .create-plan-button:hover {
             background-color: #48d1ff;
         }
-
     </style>
 </head>
 <body>
@@ -119,6 +102,7 @@
     <a th:href="@{/plans}" th:method="GET" class="menu-button"> Плани</a>
     <a th:href="@{/info}" th:method="GET" class="menu-button"> Профіль</a>
 </div>
+
 <div th:if="${plans.isEmpty()}">
     <p>У вас ще не створено планів, бажаєте створити новий?</p>
     <div class="main">
@@ -139,7 +123,7 @@
         </tr>
         <tr th:each="plan : ${plans}">
             <td>
-                <a th:href="@{/plans/tasks(planId=${plan.id})}" th:text="${plan.name}"></a>
+                <a th:href="@{/plans/tasks(planId=${plan.id})}" th:text="${plan.getName()}"></a>
             </td>
             <td th:text="${#dates.format(plan.getStart_date(), 'yyyy-MM-dd')}"></td>
             <td th:text="${#dates.format(plan.getEnd_date(), 'yyyy-MM-dd')}"></td>
@@ -152,6 +136,23 @@
             </form>
         </div>
     </div>
+</div>
+<div>
+    <h1>Плани до яких ви маєте доступ</h1>
+    <table>
+        <tr>
+            <th>Назва</th>
+            <th>Дата початку</th>
+            <th>Дата закінчення</th>
+        </tr>
+        <tr th:each="plan : ${access_plans}">
+            <td>
+                <a th:href="@{/plans/tasks(planId=${plan.id})}" th:text="${plan.getName()}"></a>
+            </td>
+            <td th:text="${#dates.format(plan.getStart_date(), 'yyyy-MM-dd')}"></td>
+            <td th:text="${#dates.format(plan.getEnd_date(), 'yyyy-MM-dd')}"></td>
+        </tr>
+    </table>
 </div>
 </body>
 </html>

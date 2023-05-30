@@ -22,7 +22,7 @@ public class TaskDAO {
     }
 
     public List<Task> getTaskByPlanId(int id){
-        return jdbcTemplate.query("select * from task where plan_id = ?",
+        return jdbcTemplate.query("select * from task where plan_id = ? order by end_time",
                 new Object[]{id}, new BeanPropertyRowMapper<>(Task.class));
     }
 

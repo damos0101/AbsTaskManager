@@ -26,9 +26,34 @@ public class PlanDAO {
                 new Object[]{id}, new BeanPropertyRowMapper<>(Plan.class));
     }
 
+    public Person getPersonByPlanId(int id){
+        return jdbcTemplate.query("SELECT person.* FROM person JOIN plan ON person.id = plan.person_id WHERE plan.id = ?",
+                new Object[]{id}, new BeanPropertyRowMapper<>(Person.class)).stream().findAny().orElse(null);
+    }
+
     public Plan findById(int id) {
         return jdbcTemplate.query("select * from plan where id=?",
                         new Object[]{id}, new BeanPropertyRowMapper<>(Plan.class))
                 .stream().findAny().orElse(null);
+    }
+
+    public void addAccess(int personId, int planId){
+        jdbcTemplate.update("insert into plan_access(person_id, plan_id) VALUES (?,?)", personId, planId);
+    }
+
+    public List<Person> getUsersByPlanAccess(int planId){
+        return jdbcTemplate.query("SELECT person.* FROM person JOIN plan_access ON person.id = plan_access.person_id WHERE plan_access.plan_id = ?",
+                new Object[]{planId}, new BeanPropertyRowMapper<>(Person.class));
+    }
+
+    public List<Plan> getPlansAccessByPersonId(Integer userId) {
+        return jdbcTemplate.query("SELECT plan.* FROM plan JOIN plan_access ON plan.id = plan_access.plan_id WHERE plan_access.person_id = ?",
+                new Object[]{userId}, new BeanPropertyRowMapper<>(Plan.class));
+    }
+
+    public boolean isHaveAccess(int userId, int planId){
+        String sql = "SELECT COUNT(*) FROM plan_access WHERE person_id = ? AND plan_id = ?";
+        int count = jdbcTemplate.queryForObject(sql, new Object[]{userId, planId}, Integer.class);
+        return count > 0;
     }
 }
