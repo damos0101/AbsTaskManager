@@ -8,9 +8,7 @@ import moskvin.util.PlanValidator;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
@@ -66,6 +64,17 @@ public class PlanController {
             plan.setPerson_id(person.getId());
 
             planDAO.save(plan);
+            return "redirect:/plans";
+        }
+        return "redirect:/authorization";
+    }
+
+    @DeleteMapping("/plan/delete")
+    public String deletePlan(@RequestParam("planId") int planId, Model model, HttpSession session){
+        Integer userId = (Integer) session.getAttribute("userId");
+        if (userId != null) {
+            planDAO.deletePlan(planId);
+            planDAO.deleteAccess(planId);
             return "redirect:/plans";
         }
         return "redirect:/authorization";

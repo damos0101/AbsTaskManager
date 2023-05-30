@@ -56,4 +56,12 @@ public class PlanDAO {
         int count = jdbcTemplate.queryForObject(sql, new Object[]{userId, planId}, Integer.class);
         return count > 0;
     }
+
+    public void deletePlan(int planId) {
+        jdbcTemplate.update("delete from plan where id=?", planId);
+    }
+
+    public void deleteAccess(int planId){
+        jdbcTemplate.update("delete from plan_access where plan_id=?", planId);
+    }
 }

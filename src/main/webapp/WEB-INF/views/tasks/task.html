@@ -2,9 +2,91 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Завдання</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #ffffff;
+            margin: 0;
+            padding: 0;
+        }
+
+        .menu-bar {
+            background-color: #4aeaff;
+            padding: 20px;
+            width: 100%;
+            height: 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            vertical-align: auto;
+        }
+
+        .menu-button {
+            color: #ffffff;
+            text-decoration: none;
+            padding: 10px 20px;
+            margin-left: 10px;
+            font-size: x-large;
+        }
+
+        .delete-task-button {
+            background-color: #4aeaff;
+            width: 160px;
+            color: #ffffff;
+            border: none;
+            border-radius: 5px;
+            padding: 15px 20px;
+            font-size: 10px;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .delete-task-button:hover {
+            background-color: #48d1ff;
+        }
+    </style>
 </head>
 <body>
+<div class="menu-bar">
+    <a th:href="@{/friends}" th:method="GET" class="menu-button"> Друзі</a>
+    <a th:href="@{/plans}" th:method="GET" class="menu-button"> Плани</a>
+    <a th:href="@{/info}" th:method="GET" class="menu-button"> Профіль</a>
+</div>
+<h1>Завдання</h1>
+<p>
+    <span>Назва:</span>
+    <span th:text="${task.getName()}"></span>
+</p>
+<p>
+    <span>Час початку:</span>
+    <span th:text="${task.getStart_time()}"></span>
+</p>
+<p>
+    <span>Час закінчення:</span>
+    <span th:text="${task.getEnd_time()}"></span>
+</p>
+<p>
+    <span>Виконано:</span>
+    <span th:text="${task.isCompleted()} ? 'так' : 'ні'"></span>
+</p>
 
+<form th:action="@{/task/update}" method="POST">
+    <p>
+        <span>Виконано:</span>
+        <label><input type="radio" name="completed" value="true" th:checked="${task.isCompleted()}" /> Так</label>
+        <label><input type="radio" name="completed" value="false" th:checked="${!task.isCompleted()}" /> Ні</label>
+    </p>
+    <input type="hidden" name="taskId" th:value="${task.id}" />
+    <input type="hidden" name="planId" th:value="${planId}" />
+    <button type="submit" class="delete-task-button">Зберегти оновлення</button>
+</form>
+<br/>
+
+<form th:method="DELETE" th:action="@{/task/delete}">
+    <input type="hidden" name="taskId" th:value="${task.id}"/>
+    <input type="hidden" name="planId" th:value="${planId}"/>
+    <button type="submit" class="delete-task-button">Видалити завдання</button>
+</form>
 </body>
 </html>

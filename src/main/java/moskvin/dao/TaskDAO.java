@@ -31,4 +31,12 @@ public class TaskDAO {
                         new Object[]{id}, new BeanPropertyRowMapper<>(Task.class))
                 .stream().findAny().orElse(null);
     }
+
+    public void deleteTask(int id){
+        jdbcTemplate.update("delete from task where id=?", id);
+    }
+
+    public void setCompleted(boolean completed, int taskId) {
+        jdbcTemplate.update("UPDATE task SET completed = ? WHERE id = ?", completed, taskId);
+    }
 }

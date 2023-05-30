@@ -11,10 +11,7 @@ import moskvin.util.TaskValidator;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpSession;
@@ -46,6 +43,12 @@ public class TaskController {
                 model.addAttribute("planId", planId);
                 model.addAttribute("users", planDAO.getUsersByPlanAccess(planId));
                 model.addAttribute("admin", planDAO.getPersonByPlanId(planId));
+                if(plan.getPerson_id()==userId) {
+                    model.addAttribute("isCreator", true);
+                }
+                else{
+                    model.addAttribute("isCreator", false);
+                }
                 return "tasks/tasks";
             } else {
                 // Відобразити повідомлення про помилку доступу
@@ -107,6 +110,41 @@ public class TaskController {
                 redirectAttributes.addFlashAttribute("userNameError", "Ви можете давати доступ тільки друзям");
                 return "redirect:/plans/tasks?planId="+planId;
             }
+        }
+        return "redirect:/authorization";
+    }
+
+    @GetMapping("/plan/tasks/task")
+    public String showTask(@RequestParam("taskId") int taskId, @RequestParam("planId") int planId, Model model, HttpSession session){
+        Integer userId = (Integer) session.getAttribute("userId");
+        if (userId!=null){
+            model.addAttribute("task", taskDAO.show(taskId));
+            model.addAttribute("planId", planId);
+            return "tasks/task";
+        }
+        return "redirect:/authorization";
+    }
+
+    @PostMapping("/task/update")
+    public String updateCompleted(@RequestParam("taskId") int taskId, Model model, @RequestParam("planId") int planId, HttpSession session, @RequestParam("completed") boolean completed){
+        Integer userId = (Integer) session.getAttribute("userId");
+        if (userId!=null){
+            Task task = taskDAO.show(taskId);
+            task.setCompleted(completed);
+            taskDAO.setCompleted(completed, taskId);
+            model.addAttribute("planId", planId);
+            return "redirect:/plan/tasks/task?taskId="+taskId;
+        }
+        return "redirect:/authorization";
+    }
+
+    @DeleteMapping("/task/delete")
+    public String deleteTask(@RequestParam("taskId") int taskId, @RequestParam("planId") int planId, Model model, HttpSession session){
+        Integer userId = (Integer) session.getAttribute("userId");
+        if (userId!=null){
+            taskDAO.deleteTask(taskId);
+            model.addAttribute("planId", planId);
+            return "redirect:/plans/tasks?planId="+planId;
         }
         return "redirect:/authorization";
     }

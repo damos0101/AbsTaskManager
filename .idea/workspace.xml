@@ -9,17 +9,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5a312df2-0748-4768-92b6-b91a3b5079c2" name="Changes" comment="add Friendship">
+    <list default="true" id="5a312df2-0748-4768-92b6-b91a3b5079c2" name="Changes" comment="add basicAccess">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/moskvin/controllers/FriendshipController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/moskvin/controllers/FriendshipController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/moskvin/controllers/PlanController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/moskvin/controllers/PlanController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/moskvin/controllers/TaskController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/moskvin/controllers/TaskController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/moskvin/dao/FriendshipDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/moskvin/dao/FriendshipDAO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/moskvin/dao/PlanDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/moskvin/dao/PlanDAO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/moskvin/dao/TaskDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/moskvin/dao/TaskDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/friends/friends.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/friends/friends.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/menu/plans.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/menu/plans.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/tasks/newTask.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/tasks/newTask.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/tasks/task.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/tasks/task.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/tasks/tasks.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/tasks/tasks.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -74,7 +70,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "D:/Java/AbsTaskManager",
+    "last_opened_file_path": "D:/Java/TestProjectSpring",
     "list.type.of.created.stylesheet": "CSS",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
@@ -214,7 +210,7 @@
       <workItem from="1685091650075" duration="15597000" />
       <workItem from="1685264978859" duration="13970000" />
       <workItem from="1685360617759" duration="14729000" />
-      <workItem from="1685439664437" duration="7268000" />
+      <workItem from="1685439664437" duration="13409000" />
     </task>
     <task id="LOCAL-00001" summary="First Commit">
       <created>1685100562444</created>
@@ -251,7 +247,14 @@
       <option name="project" value="LOCAL" />
       <updated>1685375291344</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="add basicAccess">
+      <created>1685446960700</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1685446960700</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -273,6 +276,7 @@
     <MESSAGE value="Add Task" />
     <MESSAGE value="Redesign" />
     <MESSAGE value="add Friendship" />
-    <option name="LAST_COMMIT_MESSAGE" value="add Friendship" />
+    <MESSAGE value="add basicAccess" />
+    <option name="LAST_COMMIT_MESSAGE" value="add basicAccess" />
   </component>
 </project>
