@@ -66,12 +66,13 @@
     <span>Час закінчення:</span>
     <span th:text="${task.getEnd_time()}"></span>
 </p>
+
 <p>
     <span>Виконано:</span>
     <span th:text="${task.isCompleted()} ? 'так' : 'ні'"></span>
 </p>
 
-<form th:action="@{/task/update}" method="POST">
+<form th:action="@{/task/update}" method="POST" th:if="${isCreator or roleId == 2}">
     <p>
         <span>Виконано:</span>
         <label><input type="radio" name="completed" value="true" th:checked="${task.isCompleted()}" /> Так</label>
@@ -83,7 +84,7 @@
 </form>
 <br/>
 
-<form th:method="DELETE" th:action="@{/task/delete}">
+<form th:method="DELETE" th:action="@{/task/delete}" th:if="${isCreator or roleId == 2}">
     <input type="hidden" name="taskId" th:value="${task.id}"/>
     <input type="hidden" name="planId" th:value="${planId}"/>
     <button type="submit" class="delete-task-button">Видалити завдання</button>

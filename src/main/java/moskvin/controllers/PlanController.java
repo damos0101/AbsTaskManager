@@ -2,6 +2,7 @@ package moskvin.controllers;
 
 import moskvin.dao.PersonDAO;
 import moskvin.dao.PlanDAO;
+import moskvin.dao.RoleDAO;
 import moskvin.models.Person;
 import moskvin.models.Plan;
 import moskvin.util.PlanValidator;
@@ -17,11 +18,13 @@ import javax.validation.Valid;
 public class PlanController {
     private final PersonDAO personDAO;
     private final PlanDAO planDAO;
+    private final RoleDAO roleDAO;
     private final PlanValidator planValidator;
 
-    public PlanController(PersonDAO personDAO, PlanDAO planDAO, PlanValidator planValidator) {
+    public PlanController(PersonDAO personDAO, PlanDAO planDAO, RoleDAO roleDAO, PlanValidator planValidator) {
         this.personDAO = personDAO;
         this.planDAO = planDAO;
+        this.roleDAO = roleDAO;
         this.planValidator = planValidator;
     }
 
@@ -76,6 +79,17 @@ public class PlanController {
             planDAO.deletePlan(planId);
             planDAO.deleteAccess(planId);
             return "redirect:/plans";
+        }
+        return "redirect:/authorization";
+    }
+
+    @DeleteMapping("/take-away-access")
+    public String takeawayAccess(@RequestParam("planId") int planId, @RequestParam("personId") int personId, HttpSession session){
+        Integer userId = (Integer) session.getAttribute("userId");
+        if (userId != null) {
+            planDAO.takeawayAccess(planId, personId);
+            roleDAO.deleteRole(personId, planId);
+            return "redirect:/plans/tasks?planId="+planId;
         }
         return "redirect:/authorization";
     }

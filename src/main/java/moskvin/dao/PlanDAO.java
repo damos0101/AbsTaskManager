@@ -64,4 +64,8 @@ public class PlanDAO {
     public void deleteAccess(int planId){
         jdbcTemplate.update("delete from plan_access where plan_id=?", planId);
     }
+
+    public void takeawayAccess(int planId, int personId){
+        jdbcTemplate.update("delete from plan_access where plan_id=? and person_id=?", planId, personId);
+    }
 }

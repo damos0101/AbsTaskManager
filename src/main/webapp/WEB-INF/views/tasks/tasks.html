@@ -127,7 +127,7 @@
             background-color: #48d1ff;
         }
 
-        .delete-plan-button {
+        .delete-plan-button, .take-away-access-button {
             background-color: #4aeaff;
             width: 160px;
             color: #ffffff;
@@ -139,7 +139,7 @@
             text-decoration: none;
         }
 
-        .delete-plan-button:hover {
+        .delete-plan-button:hover, .take-away-access-button:hover {
             background-color: #48d1ff;
         }
 
@@ -194,16 +194,36 @@
     </a></p>
 <h1>Користувачі що мають доступ</h1>
 <ul class="users-list">
-    <th:block th:each="user : ${users}" class="friend-item">
+    <th:block th:each="user, i : ${users}" class="friend-item">
         <a th:href="@{/info/{id}(id=${user.getId()})}" class="friend-link">
             <span class="friend-username" th:text="${user.getUsername()}"></span>
         </a>
+        <p>Роль: <span th:text="${numberRoles[i.index] == 1 ? 'Перегляд' : 'Редагування'}"></span></p>
+        <div th:if="${isCreator}">
+            <form th:action="@{/take-away-access}" th:method="POST" class="take-away-access">
+                <input type="hidden" name="personId" th:value="${user.getId()}">
+                <input type="hidden" name="planId" th:value="${planId}"/>
+                <input type="hidden" name="_method" value="DELETE"/>
+                <button type="submit" class="take-away-access-button">Забрати доступ</button>
+            </form>
+        </div>
+        <form th:if="${isCreator}" th:action="@{/update-role}" method="POST">
+            <p>
+                <span>Роль</span>
+                <label><input type="radio" name="roleId" th:checked="${numberRoles[i.index] == 1}" value="1" /> Перегляд</label>
+                <label><input type="radio" name="roleId" th:checked="${numberRoles[i.index] == 2}" value="2" /> Редагування</label>
+            </p>
+            <input type="hidden" name="personId" th:value="${user.getId()}" />
+            <input type="hidden" name="planId" th:value="${planId}" />
+            <button type="submit" class="take-away-access-button">Зберегти оновлення</button>
+        </form>
+        <br/>
     </th:block>
 </ul>
 
 <div th:if="${isCreator}">
     <form th:method="POST" th:action="@{/plan/delete}">
-        <input type="hidden" name="_method" value="DELETE" />
+        <input type="hidden" name="_method" value="DELETE"/>
         <input type="hidden" name="planId" th:value="${planId}"/>
         <button type="submit" class="delete-plan-button">Видалити план</button>
     </form>
