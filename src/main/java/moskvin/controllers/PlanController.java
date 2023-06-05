@@ -32,7 +32,6 @@ public class PlanController {
     public String viewAllPlans(Model model, HttpSession session){
         Integer userId = (Integer) session.getAttribute("userId");
         if (userId != null) {
-            // Встановлення класу Person, який створив план
             model.addAttribute("plans", planDAO.getPlansByPersonId(userId));
             model.addAttribute("access_plans", planDAO.getPlansAccessByPersonId(userId));
 
@@ -59,13 +58,8 @@ public class PlanController {
         }
         Integer userId = (Integer) session.getAttribute("userId");
         if (userId != null) {
-
-            // Отримання ідентифікатора користувача з принципала
             Person person = personDAO.findById(userId);
-
-            // Встановлення класу Person, який створив план
             plan.setPerson_id(person.getId());
-
             planDAO.save(plan);
             return "redirect:/plans";
         }

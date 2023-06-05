@@ -87,6 +87,4 @@ public class InfoController {
         }
         return "redirect:/authorization";
     }
-
-
 }

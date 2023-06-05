@@ -149,7 +149,6 @@ public class TaskController {
             } else {
                 model.addAttribute("roleId", roleDAO.getRoleByPersonIdAndPlanId(userId, planId));
                 model.addAttribute("isCreator", false);
-                System.out.println(roleDAO.getRoleByPersonIdAndPlanId(userId, planId));
             }
             model.addAttribute("task", taskDAO.show(taskId));
             model.addAttribute("planId", planId);

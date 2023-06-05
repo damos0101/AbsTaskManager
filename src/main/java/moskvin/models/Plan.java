@@ -1,6 +1,5 @@
 package moskvin.models;
 
-import moskvin.util.EndDateAfterStartDate;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.validation.constraints.Future;

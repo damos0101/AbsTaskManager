@@ -25,9 +25,6 @@ public class FriendshipDAO {
                 new Object[]{id, id}, new BeanPropertyRowMapper<>(Person.class));
     }
 
-    /*public List<Person> getFriendshipRequestsByPersonId(Integer userId) {
-    }*/
-
     public void sendFriendshipRequest(int person1_id, int person2_id){
         jdbcTemplate.update("INSERT INTO friendship (person1_id, person2_id) VALUES (?, ?)", person1_id, person2_id);
     }

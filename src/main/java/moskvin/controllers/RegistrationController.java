@@ -38,6 +38,6 @@ public class RegistrationController {
             return "registration/registration";
         }
         personDAO.save(person);
-        return "redirect:/authorization"; // Перенаправлення після успішної реєстрації
+        return "redirect:/authorization";
     }
 }
