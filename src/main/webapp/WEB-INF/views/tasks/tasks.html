@@ -127,7 +127,7 @@
             background-color: #48d1ff;
         }
 
-        .delete-plan-button, .take-away-access-button {
+        .delete-plan-button, .take-away-access-button, .add-to-plan-button, .optimize-plan-button {
             background-color: #4aeaff;
             width: 160px;
             color: #ffffff;
@@ -139,7 +139,7 @@
             text-decoration: none;
         }
 
-        .delete-plan-button:hover, .take-away-access-button:hover {
+        .delete-plan-button:hover, .take-away-access-button:hover, .add-to-plan-button:hover, .optimize-plan-button:hover {
             background-color: #48d1ff;
         }
 
@@ -155,16 +155,21 @@
 <table>
     <tr>
         <th>Назва</th>
-        <th>Час початку</th>
-        <th>Час закінчення</th>
+        <th>Час виконання(години)</th>
+        <th>Виконує</th>
         <th>Виконано</th>
     </tr>
     <tr th:each="task : ${tasks}">
         <td>
             <a th:href="@{/plan/tasks/task(taskId=${task.id}, planId=${planId})}" th:text="${task.getName()}"></a>
         </td>
-        <td th:text="${task.getStart_time()}"></td>
-        <td th:text="${task.getEnd_time()}"></td>
+        <td th:text="${task.getPeriod()}"></td>
+        <td>
+            <a th:if="${task.getPerson() != null}"
+               th:href="@{/info/{id}(id=${task.getPerson().getId()})}"
+               th:text="${task.getPerson().getUsername()}"></a>
+            <span th:unless="${task.getPerson() != null}">null</span>
+        </td>
         <td>
             <span th:text="${task.isCompleted()} ? 'так' : 'ні'"></span>
         </td>
@@ -177,6 +182,26 @@
         <button class="create-task-button" type="submit">Створити завдання</button>
     </form>
 </div>
+
+<h1>Користувачі що додані до плану для оптимізації роботи</h1>
+<th:block th:each="optPerson : ${optimizedPeople}" class="friend-item">
+    <a th:href="@{/info/{id}(id=${optPerson.getId()})}" class="friend-link">
+        <span class="friend-username" th:text="${optPerson.getUsername()}"></span>
+    </a>
+    <form th:action="@{/remove-person-optimization}" th:method="POST" class="take-away-access">
+        <input type="hidden" name="personId" th:value="${optPerson.getId()}">
+        <input type="hidden" name="planId" th:value="${planId}"/>
+        <input type="hidden" name="_method" value="DELETE"/>
+        <button type="submit" class="take-away-access-button">Видалити з оптимізації</button>
+    </form>
+    <br/>
+</th:block>
+<form th:action="@{/optimize-plan}" th:method="POST" class="optimize-plan">
+    <input type="hidden" name="planId" th:value="${planId}"/>
+    <button type="submit" class="optimize-plan-button">Оптимізувати план між людьми</button>
+</form>
+<h1>Додати користувача до перегляду</h1>
+
 <div th:if="${isCreator}">
     <form th:action="@{/plan/addPerson}" method="POST" class="add-friend-form">
         <input type="text" name="username" placeholder="Введіть юзернейм" class="friend-username-input">
@@ -205,6 +230,13 @@
                 <input type="hidden" name="planId" th:value="${planId}"/>
                 <input type="hidden" name="_method" value="DELETE"/>
                 <button type="submit" class="take-away-access-button">Забрати доступ</button>
+            </form>
+        </div>
+        <div th:if="${isCreator}">
+            <form th:action="@{/add-to-plan}" th:method="POST" class="add-to-plan">
+                <input type="hidden" name="personId" th:value="${user.getId()}">
+                <input type="hidden" name="planId" th:value="${planId}"/>
+                <button type="submit" class="add-to-plan-button">Додати користувача до плану оптимізації</button>
             </form>
         </div>
         <form th:if="${isCreator}" th:action="@{/update-role}" method="POST">

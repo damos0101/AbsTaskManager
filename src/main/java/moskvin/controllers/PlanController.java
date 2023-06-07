@@ -1,5 +1,6 @@
 package moskvin.controllers;
 
+import moskvin.dao.OptimizationDAO;
 import moskvin.dao.PersonDAO;
 import moskvin.dao.PlanDAO;
 import moskvin.dao.RoleDAO;
@@ -20,12 +21,14 @@ public class PlanController {
     private final PlanDAO planDAO;
     private final RoleDAO roleDAO;
     private final PlanValidator planValidator;
+    private final OptimizationDAO optimizationDAO;
 
-    public PlanController(PersonDAO personDAO, PlanDAO planDAO, RoleDAO roleDAO, PlanValidator planValidator) {
+    public PlanController(PersonDAO personDAO, PlanDAO planDAO, RoleDAO roleDAO, PlanValidator planValidator, OptimizationDAO optimizationDAO) {
         this.personDAO = personDAO;
         this.planDAO = planDAO;
         this.roleDAO = roleDAO;
         this.planValidator = planValidator;
+        this.optimizationDAO = optimizationDAO;
     }
 
     @GetMapping("/plans")
@@ -83,6 +86,7 @@ public class PlanController {
         if (userId != null) {
             planDAO.takeawayAccess(planId, personId);
             roleDAO.deleteRole(personId, planId);
+            optimizationDAO.deleteFromTaskPersonByPersonAndPlanId(personId,planId);
             return "redirect:/plans/tasks?planId="+planId;
         }
         return "redirect:/authorization";

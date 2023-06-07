@@ -2,6 +2,7 @@ package moskvin.controllers;
 
 import moskvin.dao.*;
 import moskvin.models.Person;
+import moskvin.models.PersonTasks;
 import moskvin.models.Plan;
 import moskvin.models.Task;
 import moskvin.util.TaskValidator;
@@ -24,14 +25,16 @@ public class TaskController {
     private final PersonDAO personDAO;
     private final FriendshipDAO friendshipDAO;
     private final RoleDAO roleDAO;
+    private final OptimizationDAO optimizationDAO;
 
-    public TaskController(TaskDAO taskDAO, TaskValidator taskValidator, PlanDAO planDAO, PersonDAO personDAO, FriendshipDAO friendshipDAO, RoleDAO roleDAO) {
+    public TaskController(TaskDAO taskDAO, TaskValidator taskValidator, PlanDAO planDAO, PersonDAO personDAO, FriendshipDAO friendshipDAO, RoleDAO roleDAO, OptimizationDAO optimizationDAO) {
         this.taskDAO = taskDAO;
         this.taskValidator = taskValidator;
         this.planDAO = planDAO;
         this.personDAO = personDAO;
         this.friendshipDAO = friendshipDAO;
         this.roleDAO = roleDAO;
+        this.optimizationDAO = optimizationDAO;
     }
 
     @GetMapping("/plans/tasks")
@@ -40,11 +43,17 @@ public class TaskController {
         if (userId != null) {
             Plan plan = planDAO.findById(planId);
             if ((plan != null && plan.getPerson_id() == userId) || planDAO.isHaveAccess(userId, planId)) {
-                model.addAttribute("tasks", taskDAO.getTaskByPlanId(planId));
                 model.addAttribute("planId", planId);
                 model.addAttribute("users", planDAO.getUsersByPlanAccess(planId));
                 model.addAttribute("admin", planDAO.getPersonByPlanId(planId));
                 model.addAttribute("userId", userId);
+                model.addAttribute("optimizedPeople", optimizationDAO.getPeopleForOptimization(planId));
+                List<Task> tasks = taskDAO.getTaskByPlanId(planId);
+                for(int i = 0;i<tasks.size();++i){
+                    tasks.get(i).setPerson(optimizationDAO.getPersonByTaskId(tasks.get(i).getId()));
+                }
+                model.addAttribute("tasks", tasks);
+                //model.addAttribute("isPersonAlreadyInPlan", false);
                 if (plan.getPerson_id() == userId) {
                     model.addAttribute("isCreator", true);
                 } else {
@@ -56,9 +65,6 @@ public class TaskController {
                     int roleId = roleDAO.getRoleByPersonIdAndPlanId(person.getId(), planId);
                     numberRoles.add(roleId);
                 }
-                for (int i = 0; i < numberRoles.size(); ++i) {
-                    System.out.println(numberRoles.get(i));
-                }
                 model.addAttribute("numberRoles", numberRoles);
                 return "tasks/tasks";
             } else {
@@ -67,6 +73,7 @@ public class TaskController {
         }
         return "redirect:/authorization";
     }
+
 
     @GetMapping("/plan/tasks/new")
     public String showCreateTaskForm(@RequestParam("planId") int planId, Model model, HttpSession session) {
@@ -138,6 +145,47 @@ public class TaskController {
         return "redirect:/authorization";
     }
 
+    @PostMapping("/add-to-plan")
+    public String addToPlanPerson(@RequestParam("planId") int planId,
+                                  @RequestParam("personId") int personId,
+                                  HttpSession session, Model model) {
+        Integer userId = (Integer) session.getAttribute("userId");
+        if (userId != null) {
+            optimizationDAO.addPersonToPlanOptimization(planId, personId);
+            model.addAttribute("planId", planId);
+            //model.addAttribute("isPersonAlreadyInPlan", optimizationDAO.isPersonAlreadyInPlan(planId, personId));
+            return "redirect:/plans/tasks?planId=" + planId;
+        }
+        return "redirect:/authorization";
+    }
+
+    @PostMapping("/optimize-plan")
+    public String optimizePlan(@RequestParam("planId") int planId,
+                               HttpSession session, Model model) {
+        Integer userId = (Integer) session.getAttribute("userId");
+        if (userId != null) {
+            optimizationDAO.deleteOptimization(planId);
+            List<Person> optimizedPeople = optimizationDAO.getPeopleForOptimization(planId);
+            List<Task> tasks = taskDAO.getTaskByPlanId(planId);
+            List<PersonTasks> personTasks = new ArrayList<>();
+            for (int i = 0; i < optimizedPeople.size(); ++i) {
+                personTasks.add(new PersonTasks(optimizedPeople.get(i).getName(), optimizedPeople.get(i).getId()));
+            }
+            Optimization.optimizeTaskDistribution(personTasks, tasks);
+            for (int i = 0; i < optimizedPeople.size(); ++i) {
+                List<Task> pTasks = personTasks.get(i).getTasks();
+                for (int j = 0; j < pTasks.size(); ++j) {
+                    Task task = pTasks.get(j);
+                    task.setPerson(optimizedPeople.get(i));
+                    optimizationDAO.addPersonToTask(task.getId(), personTasks.get(i).getId());
+                }
+            }
+            model.addAttribute("planId", planId);
+            return "redirect:/plans/tasks?planId=" + planId;
+        }
+        return "redirect:/authorization";
+    }
+
     @GetMapping("/plan/tasks/task")
     public String showTask(@RequestParam("taskId") int taskId, @RequestParam("planId") int planId, Model model, HttpSession session) {
         Integer userId = (Integer) session.getAttribute("userId");
@@ -151,6 +199,7 @@ public class TaskController {
                 model.addAttribute("isCreator", false);
             }
             model.addAttribute("task", taskDAO.show(taskId));
+            model.addAttribute("person", optimizationDAO.getPersonByTaskId(taskId));
             model.addAttribute("planId", planId);
             return "tasks/task";
         }
@@ -176,6 +225,18 @@ public class TaskController {
         if (userId != null) {
             taskDAO.deleteTask(taskId);
             model.addAttribute("planId", planId);
+            return "redirect:/plans/tasks?planId=" + planId;
+        }
+        return "redirect:/authorization";
+    }
+
+    @DeleteMapping("/remove-person-optimization")
+    public String removePersonOptimization(@RequestParam("planId") int planId,
+                                           @RequestParam("personId") int personId,
+                                           Model model, HttpSession session){
+        Integer userId = (Integer) session.getAttribute("userId");
+        if (userId != null) {
+            optimizationDAO.deleteFromTaskPersonByPersonAndPlanId(personId, planId);
             return "redirect:/plans/tasks?planId=" + planId;
         }
         return "redirect:/authorization";

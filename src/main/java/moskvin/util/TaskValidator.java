@@ -23,8 +23,6 @@ public class TaskValidator implements Validator {
     @Override
     public void validate(Object o, Errors errors) {
         Task task = (Task) o;
-        if(task.getStart_time() != null && task.getEnd_time() != null && task.getEnd_time().isBefore(task.getStart_time())){
-            errors.rejectValue("end_time", "", "Час закінчення повинен бути пізнішим за час початку");
-        }
+
     }
 }

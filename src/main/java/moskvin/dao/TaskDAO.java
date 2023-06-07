@@ -17,12 +17,12 @@ public class TaskDAO {
     }
 
     public void save(Task task) {
-        jdbcTemplate.update("insert into task(plan_id, name, start_time, end_time, completed) values(?,?,?,?,?)",
-                task.getPlan_id(), task.getName(), task.getStart_time(), task.getEnd_time(), false);
+        jdbcTemplate.update("insert into task(plan_id, name, period, completed) values(?,?,?,?)",
+                task.getPlan_id(), task.getName(), task.getPeriod(), false);
     }
 
     public List<Task> getTaskByPlanId(int id){
-        return jdbcTemplate.query("select * from task where plan_id = ? order by end_time",
+        return jdbcTemplate.query("select * from task where plan_id = ? order by period",
                 new Object[]{id}, new BeanPropertyRowMapper<>(Task.class));
     }
 

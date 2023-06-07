@@ -102,14 +102,9 @@
             <span class="error" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span>
         </div>
         <div class="form-group">
-            <label for="start_time">Час початку</label>
-            <input type="datetime-local" id="start_time" th:field="*{start_time}" th:attr="pattern='yyyy-MM-dd\'T\'HH:mm'">
-            <span class="error" th:if="${#fields.hasErrors('start_time')}" th:errors="*{start_time}"></span>
-        </div>
-        <div class="form-group">
-            <label for="end_time">Дата закінчення</label>
-            <input type="datetime-local" id="end_time" th:field="*{end_time}" th:attr="pattern='yyyy-MM-dd\'T\'HH:mm'">
-            <span class="error" th:if="${#fields.hasErrors('end_time')}" th:errors="*{end_time}"></span>
+            <label for="period">Час виконання(години)</label>
+            <input type="number" step="0.01" id="period" th:field="*{period}">
+            <span class="error" th:if="${#fields.hasErrors('period')}" th:errors="*{period}"></span>
         </div>
         <input type="hidden" name="planId" th:value="${planId}" />
         <div class="form-group">

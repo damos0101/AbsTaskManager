@@ -2,6 +2,7 @@ package moskvin.models;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
@@ -11,13 +12,11 @@ public class Task {
     private int plan_id;
     @NotBlank(message = "Назва не може бути порожньою")
     private String name;
-    @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
-    @NotNull(message = "Дата початку не може бути порожньою")
-    private LocalDateTime start_time;
-    @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
-    @NotNull(message = "Дата початку не може бути порожньою")
-    private LocalDateTime end_time;
+    @Min(value = 1, message = "Час на виконання повинен бути мінімум година")
+    private float period;
     private boolean completed;
+
+    private Person person;
 
     public Task() {
     }
@@ -46,27 +45,27 @@ public class Task {
         this.name = name;
     }
 
-    public LocalDateTime getStart_time() {
-        return start_time;
-    }
-
-    public void setStart_time(LocalDateTime start_time) {
-        this.start_time = start_time;
-    }
-
-    public LocalDateTime getEnd_time() {
-        return end_time;
-    }
-
-    public void setEnd_time(LocalDateTime end_time) {
-        this.end_time = end_time;
-    }
-
     public boolean isCompleted() {
         return completed;
     }
 
     public void setCompleted(boolean completed) {
         this.completed = completed;
+    }
+
+    public float getPeriod() {
+        return period;
+    }
+
+    public void setPeriod(float period) {
+        this.period = period;
+    }
+
+    public Person getPerson() {
+        return person;
+    }
+
+    public void setPerson(Person person) {
+        this.person = person;
     }
 }

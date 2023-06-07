@@ -59,12 +59,16 @@
     <span th:text="${task.getName()}"></span>
 </p>
 <p>
-    <span>Час початку:</span>
-    <span th:text="${task.getStart_time()}"></span>
+    <span>Час виконання:</span>
+    <span th:text="${task.getPeriod()}"></span>
 </p>
+
 <p>
-    <span>Час закінчення:</span>
-    <span th:text="${task.getEnd_time()}"></span>
+    <span>Виконує:</span>
+    <a th:if="${person != null}"
+       th:href="@{/info/{id}(id=${person.getId()})}"
+       th:text="${person.getUsername()}"></a>
+    <span th:unless="${person != null}">Ніхто</span>
 </p>
 
 <p>
